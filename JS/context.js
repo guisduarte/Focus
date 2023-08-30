@@ -13,26 +13,27 @@ export default function context() {
   const botoes = document.querySelectorAll('.app__card-button');
 
   //Eventos de click em cada botão para mudar os contextos.
-  focoBt.addEventListener('click', () => {
-    tempoDecorridoEmSegundos.valor = 1500;
-    alterarContexto('foco');
-    focoBt.classList.add('active');
-  });
 
-  curtoBt.addEventListener('click', () => {
-    tempoDecorridoEmSegundos.valor = 300;
-    alterarContexto('descanso-curto');
-    curtoBt.classList.add('active');
-  });
+  botoes.forEach((botao, indice) => {
+    botao.addEventListener('click', () => {     
+      botao.classList.add('active');               
+      if (indice === 0) {
+        tempoDecorridoEmSegundos.valor = 1500;
+        alterarContexto('foco');
+      } else if (indice === 1) {
+        tempoDecorridoEmSegundos.valor = 300;
+        alterarContexto('descanso-curto');
+      } else if (indice === 2) {
+        tempoDecorridoEmSegundos.valor = 900;
+        alterarContexto('descanso-longo');
+      }
 
-  longoBt.addEventListener('click', () => {
-    tempoDecorridoEmSegundos.valor = 900;
-    alterarContexto('descanso-longo');
-    longoBt.classList.add('active');
-  });
+    });
+           
+  })
 
   // Função que altera o contexto.
-  function alterarContexto(contexto) {
+  function alterarContexto(contexto) { 
     mostrarTempo();
     botoes.forEach(function (contexto) {
       contexto.classList.remove('active');
